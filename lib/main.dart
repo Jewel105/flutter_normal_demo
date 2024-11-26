@@ -1,35 +1,18 @@
-import 'dart:async';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'utils/storage_util.dart';
+import 'utils/index.dart';
 
 void main() {
-  // Report Flutter synchronization errors
-  // 上报Flutter的同步异常
-  FlutterExceptionHandler? onError = FlutterError.onError;
-  FlutterError.onError = (FlutterErrorDetails details) {
-    onError?.call(details);
-    // TODO: Implement the error reporting logic
-  };
+  final errorReport = ErrorReportUtil();
 
-  // Report Flutter asynchronous errors
-  // 拦截异步错误
-  ZoneSpecification zoneSpecification = ZoneSpecification(
-    handleUncaughtError: (Zone self, ZoneDelegate parent, Zone zone,
-        Object error, StackTrace stackTrace) {
-      // Network errors do not need to be reported
-      // 网络异常不上报
-      // if (error is DioException || error is DioH2NotSupportedException) return;
-      // TODO: Implement the error reporting logic
-    },
-  );
-
-  Zone.current.fork(specification: zoneSpecification).run(() async {
+  // Run the app within the error-handling zone
+  errorReport.errorHandlingZone.run(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    // Initialize the storage utility
+
+    // Initialize utilities
     await StorageUtil.init();
+
     runApp(const MyApp());
   });
 }
@@ -39,13 +22,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return ScreenUtilInit(
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const MyHomePage(title: 'Flutter Demo Home Page'),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
