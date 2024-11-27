@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_normal_demo/common/app/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'common/router/index.dart';
 import 'utils/index.dart';
 
 void main() {
@@ -38,8 +39,10 @@ class MyApp extends StatelessWidget {
             title: 'Flutter Demo',
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
-            themeMode: ThemeMode.system,
-            home: const MyHomePage(title: 'Flutter Demo Home Page'),
+            themeMode: ThemeMode.light,
+            onGenerateRoute: RouteConfig.generateRoute,
+            navigatorKey: navigatorKey,
+            // home: const MyHomePage(title: 'Flutter Demo Home Page'),
           ),
         );
       },

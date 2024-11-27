@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "run (dev)",
-      // "preLaunchTask": "Run Shell Script",
+      "preLaunchTask": "Run Shell Script",
       "request": "launch",
       "type": "dart",
       "args": [
