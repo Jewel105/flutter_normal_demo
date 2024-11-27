@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_normal_demo/common/app/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'utils/index.dart';
 
 void main() {
   final errorReport = ErrorReportUtil();
-
   // Run the app within the error-handling zone
   errorReport.errorHandlingZone.run(() async {
     WidgetsFlutterBinding.ensureInitialized();
-
     // Initialize utilities
     await StorageUtil.init();
-
     runApp(const MyApp());
   });
 }
@@ -27,13 +25,22 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, _) {
-        return MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
+        return GestureDetector(
+          onTap: () {
+            // Unfocus the currently focused widget when the screen is tapped
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus &&
+                currentFocus.focusedChild != null) {
+              FocusManager.instance.primaryFocus?.unfocus();
+            }
+          },
+          child: MaterialApp(
+            title: 'Flutter Demo',
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: ThemeMode.system,
+            home: const MyHomePage(title: 'Flutter Demo Home Page'),
           ),
-          home: const MyHomePage(title: 'Flutter Demo Home Page'),
         );
       },
     );
