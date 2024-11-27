@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_normal_demo/common/app/app_color.dart';
+import 'package:flutter_normal_demo/core/app/app_color.dart';
 
 class AppTheme {
   /// Main light theme for the app

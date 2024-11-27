@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_normal_demo/common/app/app_theme.dart';
+import 'package:flutter_normal_demo/core/app/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'common/router/index.dart';
-import 'utils/index.dart';
+import 'core/router/index.dart';
+import 'core/utils/index.dart';
 
 void main() {
   final errorReport = ErrorReportUtil();
@@ -20,6 +20,14 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  /// Unfocus the currently focused widget when the screen is tapped
+  void unfocus(BuildContext context) {
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+      FocusManager.instance.primaryFocus?.unfocus();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -28,14 +36,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, _) {
         return GestureDetector(
-          onTap: () {
-            // Unfocus the currently focused widget when the screen is tapped
-            FocusScopeNode currentFocus = FocusScope.of(context);
-            if (!currentFocus.hasPrimaryFocus &&
-                currentFocus.focusedChild != null) {
-              FocusManager.instance.primaryFocus?.unfocus();
-            }
-          },
+          onTap: () => unfocus(context),
           child: MaterialApp(
             title: 'Flutter Demo',
             theme: AppTheme.lightTheme,
