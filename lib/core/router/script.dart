@@ -5,7 +5,7 @@ import 'dart:io';
 void main() {
   // get the current router directory
   // 获取路由文件内容
-  var path = './lib/common/router/route_config.dart';
+  var path = './lib/core/router/route_config.dart';
   var res = File(path).readAsStringSync();
 
   // Parse the router file to extract the route names
@@ -40,5 +40,5 @@ class Routes {
 
   // Write the generated routes into a routes.dart
   // 写入文件
-  File('./lib/common/router/routes.dart').writeAsStringSync(template);
+  File('./lib/core/router/routes.dart').writeAsStringSync(template);
 }

@@ -4,7 +4,7 @@
     {
       "label": "Run Shell Script",
       "type": "shell",
-      "command": "dart ./lib/common/router/script.dart",
+      "command": "dart ./lib/core/router/script.dart",
       "presentation": {
         "echo": true,
         "reveal": "silent",
