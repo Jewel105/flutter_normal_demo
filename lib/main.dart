@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_normal_demo/core/app/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'core/app/app_theme.dart';
 import 'core/router/index.dart';
 import 'core/utils/index.dart';
 

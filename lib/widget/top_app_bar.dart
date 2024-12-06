@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_normal_demo/core/app/app_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../core/app/app_color.dart';
-import '../../core/router/nav.dart';
+import '../core/app/app_color.dart';
+import '../core/app/app_style.dart';
+import '../core/router/nav.dart';
 
 typedef BackCallback = void Function();
 

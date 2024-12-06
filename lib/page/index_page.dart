@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_normal_demo/ui/page/home/home_page.dart';
+
+import 'home/home_page.dart';
 
 class IndexPage extends StatelessWidget {
   const IndexPage({super.key});

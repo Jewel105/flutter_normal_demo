@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../ui/page/base/page_404.dart';
-import '../../ui/page/index_page.dart';
-import '../../ui/page/login/login_page.dart';
+import '../../page/base/page_404.dart';
+import '../../page/index_page.dart';
+import '../../page/login/login_page.dart';
 
 typedef WidgetBuilder = Widget Function(Object? arguments);
 
