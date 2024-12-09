@@ -105,7 +105,14 @@ class DioUtil {
   /// cancel request token
   final CancelToken _cancelToken = CancelToken();
 
+  // 取消请求方法
+  /// cancel request
+  void cancelRequests() {
+    _cancelToken.cancel('cancel');
+  }
+
   // 发送请求方法
+  // send request
   Future<T> request<T>(String path,
       {DioMethod method = DioMethod.get,
       Map<String, dynamic>? params,
@@ -115,7 +122,6 @@ class DioUtil {
       ProgressCallback? onSendProgress,
       ProgressCallback? onReceiveProgress,
       bool loading = false}) async {
-    // 将请求方法组合到options中
     options ??= Options();
     options.method = method.value;
 
@@ -125,6 +131,7 @@ class DioUtil {
 
     try {
       // 调用dio的请求方法
+      // dio request
       Response<T> response;
       response = await _dio.request<T>(path,
           data: data,
@@ -145,12 +152,7 @@ class DioUtil {
     }
   }
 
-  // 取消请求方法
-  void cancelRequests() {
-    _cancelToken.cancel('cancel');
-  }
-
-  // get请求
+  // get
   Future<T?> get<T>(
           {required String url,
           Map<String, dynamic>? params,
@@ -168,7 +170,7 @@ class DioUtil {
           onReceiveProgress: onReceiveProgress,
           loading: loading);
 
-  // POST 请求
+  // POST
   Future<T?> post<T>(
           {required String url,
           Object? data,

@@ -41,18 +41,24 @@ class DioInterceptors extends Interceptor {
         requestOptions: response.requestOptions,
         message: data.msg ?? data.code,
       ));
+      // TODO: showDialog needs to be implemented
+      // showDialog(content: err.toString());
       return;
     }
     handler.next(response);
   }
 
+  // network error interceptor
   @override
   void onError(
     DioException err,
     ErrorInterceptorHandler handler,
   ) {
-    // TODO: showDialog needs to be implemented
-    // showDialog(content: err.toString());
+    // 如果使用了代理，提示关闭代理
+    // If use proxy, show tip to close proxy
+    if (err.toString().contains('Certificate')) {
+      // showDialog(content:"please close the proxy and try again!");
+    }
     handler.next(err);
   }
 }
