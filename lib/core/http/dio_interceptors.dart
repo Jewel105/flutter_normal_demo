@@ -11,7 +11,7 @@ class DioInterceptors extends Interceptor {
   void onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
-  ) async {
+  ) {
     // Add token to headers
     // 添加token头
     String? token = StorageUtil.get(TOKEN) as String?;
@@ -29,7 +29,7 @@ class DioInterceptors extends Interceptor {
   void onResponse(
     Response<Object?> response,
     ResponseInterceptorHandler handler,
-  ) async {
+  ) {
     // TODO: BaseEntity needs to be implemented
     // 需要根据后端返回，修改BaseEntity的字段
     BaseEntity<Object?> data =
