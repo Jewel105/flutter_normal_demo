@@ -16,6 +16,8 @@ class ErrorReportUtil {
     ZoneSpecification zoneSpecification = ZoneSpecification(
       handleUncaughtError: (Zone self, ZoneDelegate parent, Zone zone,
           Object error, StackTrace stackTrace) {
+        debugPrint(error.toString());
+        debugPrint(stackTrace.toString());
         // TODO: Ignore network-related exceptions
         // 忽略网络相关异常
         // if (error is DioException || error is DioH2NotSupportedException) return;
@@ -33,6 +35,8 @@ class ErrorReportUtil {
     FlutterExceptionHandler? originalHandler = FlutterError.onError;
     FlutterError.onError = (FlutterErrorDetails errorDetails) {
       originalHandler?.call(errorDetails);
+      debugPrint(errorDetails.exception.toString());
+      debugPrint(errorDetails.stack.toString());
       _reportError(
         errorDetails.exception.toString(),
         errorDetails.stack.toString(),
@@ -43,8 +47,6 @@ class ErrorReportUtil {
   /// Reports the given error and stack trace. Only reports in release mode.
   /// 上报错误信息和堆栈，仅在 Release 模式下执行
   Future<void> _reportError(String error, String stack) async {
-    debugPrint(error);
-    debugPrint(stack);
     if (!kReleaseMode) return;
     // TODO: Add logic to report errors to your error tracking service
   }

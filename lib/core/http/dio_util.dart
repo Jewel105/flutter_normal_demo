@@ -132,17 +132,17 @@ class DioUtil {
     try {
       // 调用dio的请求方法
       // dio request
-      Response<T> response;
-      response = await _dio.request<T>(path,
-          data: data,
-          queryParameters: params,
-          cancelToken: cancelToken ?? _cancelToken,
-          options: options,
-          onSendProgress: onSendProgress,
-          onReceiveProgress: onReceiveProgress);
-
-      return BaseEntity<dynamic>.fromJson(response.data as Map<String, dynamic>)
-          .data;
+      Response<Map<String, dynamic>?> response =
+          await _dio.request<Map<String, dynamic>?>(
+        path,
+        data: data,
+        queryParameters: params,
+        cancelToken: cancelToken ?? _cancelToken,
+        options: options,
+        onSendProgress: onSendProgress,
+        onReceiveProgress: onReceiveProgress,
+      );
+      return BaseEntity<dynamic>.fromJson(response.data ?? {}).data;
     } on DioException catch (_) {
       rethrow;
     } finally {
@@ -153,38 +153,44 @@ class DioUtil {
   }
 
   // get
-  Future<T?> get<T>(
-          {required String url,
-          Map<String, dynamic>? params,
-          CancelToken? cancelToken,
-          Options? options,
-          ProgressCallback? onSendProgress,
-          ProgressCallback? onReceiveProgress,
-          bool loading = false}) =>
-      request(url,
-          method: DioMethod.get,
-          params: params,
-          cancelToken: cancelToken,
-          options: options,
-          onSendProgress: onSendProgress,
-          onReceiveProgress: onReceiveProgress,
-          loading: loading);
+  Future<T?> get<T>({
+    required String url,
+    Map<String, dynamic>? params,
+    CancelToken? cancelToken,
+    Options? options,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+    bool loading = false,
+  }) =>
+      request<T>(
+        url,
+        method: DioMethod.get,
+        params: params,
+        cancelToken: cancelToken,
+        options: options,
+        onSendProgress: onSendProgress,
+        onReceiveProgress: onReceiveProgress,
+        loading: loading,
+      );
 
   // POST
-  Future<T?> post<T>(
-          {required String url,
-          Object? data,
-          CancelToken? cancelToken,
-          Options? options,
-          ProgressCallback? onSendProgress,
-          ProgressCallback? onReceiveProgress,
-          bool loading = false}) =>
-      request(url,
-          method: DioMethod.post,
-          data: data,
-          cancelToken: cancelToken,
-          options: options,
-          onSendProgress: onSendProgress,
-          onReceiveProgress: onReceiveProgress,
-          loading: loading);
+  Future<T?> post<T>({
+    required String url,
+    Object? data,
+    CancelToken? cancelToken,
+    Options? options,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+    bool loading = false,
+  }) =>
+      request<T>(
+        url,
+        method: DioMethod.post,
+        data: data,
+        cancelToken: cancelToken,
+        options: options,
+        onSendProgress: onSendProgress,
+        onReceiveProgress: onReceiveProgress,
+        loading: loading,
+      );
 }
