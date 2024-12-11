@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import 'core/app/app_theme.dart';
+import 'core/provider/app_provider.dart';
 import 'core/router/index.dart';
 import 'core/utils/index.dart';
 
@@ -37,15 +39,20 @@ class MyApp extends StatelessWidget {
       builder: (context, _) {
         return GestureDetector(
           onTap: () => unfocus(context),
-          child: MaterialApp(
-            title: 'Flutter Demo',
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: ThemeMode.light,
-            onGenerateRoute: RouteConfig.generateRoute,
-            navigatorKey: navigatorKey,
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
+          child: MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (_) => AppProvider()),
+            ],
+            child: MaterialApp(
+              title: 'Flutter Demo',
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.darkTheme,
+              themeMode: ThemeMode.system,
+              onGenerateRoute: RouteConfig.generateRoute,
+              navigatorKey: navigatorKey,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+            ),
           ),
         );
       },
