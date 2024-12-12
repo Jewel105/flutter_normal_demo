@@ -38,15 +38,14 @@ class DioUtil {
 
   // 单例模式
   // Singleton pattern
-  static DioUtil? _instance;
-  factory DioUtil() => _instance ?? DioUtil._internal();
+  static final DioUtil _instance = DioUtil._internal();
+  factory DioUtil() => _instance;
 
   late Dio _dio;
   Dio get dio => _dio;
 
   DioUtil._internal() {
-    _instance = this;
-    _instance!._init();
+    _init();
   }
 
   _init() {
