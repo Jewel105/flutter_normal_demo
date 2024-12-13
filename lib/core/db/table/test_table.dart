@@ -3,19 +3,20 @@ import 'package:sqflite/sqflite.dart';
 
 import '../db_provider.dart';
 
-class TestService extends DbProvider {
+class TestTable extends DbProvider {
   // 单例模式
-  static TestService? _instance;
-  factory TestService() => _instance ??= TestService._();
-  TestService._();
+  // Singleton pattern
+  TestTable._internal();
+  static final TestTable _instance = TestTable._internal();
+  factory TestTable() => _instance;
 
   @override
   String tableName = "test";
 
-  ///创建表
+  /// Create table in the database
   @override
   Future<void> onCreate(Database db, int version) async {
-    debugPrint("创建表");
+    debugPrint("Create table");
     // TODO: create table
     await db.execute("""
       CREATE TABLE $tableName (
@@ -31,7 +32,7 @@ class TestService extends DbProvider {
   }
 
   // TODO: TestEntity
-  // ///查询
+  // ///查询 /// Query function
   // @override
   // Future<List<TestEntity>> find({
   //   Map<String, Object?>? where,
@@ -46,6 +47,7 @@ class TestService extends DbProvider {
   // }
 
   // ///将json转为model
+  // /// Convert JSON to model (TestEntity)
   // List<TestEntity> fromJson(List value) {
   //   List<TestEntity> banners = [];
   //   for (var element in value) {

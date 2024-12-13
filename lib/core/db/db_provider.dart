@@ -2,34 +2,37 @@ import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class DbProvider {
-  static const String _dbName = "flutter_normal_demo"; // 数据库名称
-  static const int _version = 1; // 数据库版本号
-  static late String _dbBasePath; // 数据库路径
-  static bool _needRefresh = false; // 数据库需要更新
-  static Database? _db; // 数据库实例
+  static const String _dbName = "flutter_normal_demo"; // 数据库名称 // Database name
+  static const int _version = 1; // 数据库版本号 // Database version
+  static late String _dbBasePath; // 数据库路径 // Database path
+  static bool _needRefresh =
+      false; // 数据库需要更新 // Indicates if the database needs to be refreshed
+  static Database? _db; // 数据库实例 // Database instance
 
-  ///数据库实例化完成后的操作
+  /// 数据库实例化完成后的操作
+  /// Operations after the database initialization is complete
   static onReload(Database db) async {
     if (_needRefresh) {
       try {
-        // TODO 此处编写更新数据库的脚本
+        // TODO 此处编写更新数据库的脚本 // Write database update scripts here
       } catch (e) {
-        debugPrint("数据库升级error-------$e");
+        debugPrint("Database upgrade error-------$e"); // Database upgrade error
       }
     }
   }
 
-  ///表名称
-  abstract String tableName; // 表名称
+  /// 表名称 // Table name
+  abstract String tableName;
 
-  ///表是否存在
+  /// 表是否存在 // Indicates if the table exists
   bool exists = false;
 
-  ///创建表
+  /// 创建表 // Create table
   Future<void> onCreate(Database db, int version);
 
   DbProvider() {
-    debugPrint("创建表--父类");
+    debugPrint(
+        "Creating table - parent class"); // Creating table - parent class
     if (_db == null) {
       initDatabase().then((db) {
         _db = db;
@@ -40,45 +43,45 @@ abstract class DbProvider {
     }
   }
 
-  ///创建数据库
+  /// 创建数据库 // Initialize database
   static Future<Database> initDatabase() async {
     _dbBasePath = "${await getDatabasesPath()}/$_dbName.db";
-    debugPrint("打开数据库,数据库地址：");
+    debugPrint("Opening database, database path:");
     debugPrint(_dbBasePath);
-    // 打开数据库
+
+    // 打开数据库 // Open the database
     _db = await openDatabase(
       _dbBasePath,
       version: _version,
-      // onConfigure: (db) { },
-      // onCreate: onCreate,
       onUpgrade: (db, old, newV) {
         _needRefresh = true;
-        debugPrint("数据库升级了");
+        debugPrint("Database upgraded"); // Database upgraded
       },
       onDowngrade: (db, old, newV) {
         _needRefresh = true;
-        debugPrint("数据库降级了");
+        debugPrint("Database downgraded"); // Database downgraded
       },
-      // onOpen: onOpen,
     );
     await onReload(_db!);
     return _db!;
   }
 
-  ///创建表
+  /// 创建表 // Create table
   Future<void> _initTable() async {
-    //内建表sqlite_master
+    // 内建表sqlite_master // Built-in table sqlite_master
+    // Check if the table exists
     var res = await _db!.rawQuery(
       "SELECT * FROM sqlite_master WHERE TYPE = 'table' AND NAME = '$tableName'",
     );
     if (res.isEmpty) {
-      debugPrint("表不存在，创建表");
+      debugPrint(
+          "Table does not exist, creating table"); // Table does not exist, creating table
       await onCreate(_db!, _version);
     }
     exists = true;
   }
 
-  ///表列是否存在
+  /// 表列是否存在 // Check if a table column exists
   Future<bool> columnExists(String columnName) async {
     var result = await _db!.rawQuery("""
       SELECT *
@@ -88,39 +91,37 @@ abstract class DbProvider {
     return result.isNotEmpty;
   }
 
-  ///新增列
+  /// 新增列 // Add a new column
   Future addColumn(String columnName, String type) async {
     return await _db!.rawQuery("""
-      ALTER TABLE $tableName ADD  $columnName $type
+      ALTER TABLE $tableName ADD $columnName $type
     """);
   }
 
-  ///删表
+  /// 删表 // Drop table
   Future<void> dropTable() async {
     return await _db!.execute("""
-      drop table if exists $tableName;
+      DROP TABLE IF EXISTS $tableName;
     """);
   }
 
-  ///插入数据
+  /// 插入数据 // Insert data
   Future<int> insert(Map<String, dynamic> data) async {
     return _db!.insert(tableName, data);
   }
 
-  ///删除数据, 使用whereArgs预防sql注入
+  /// 删除数据, 使用whereArgs预防SQL注入 // Delete data, use whereArgs to prevent SQL injection
   Future<int> delete(Map<String, Object?> where) async {
     List<String> keys = where.keys.toList();
     List<Object?> whereArgs = where.values.toList();
     return _db!.delete(
       tableName,
-      // 条件
       where: keys.isEmpty ? null : "${keys.join(" = ? AND ")} = ?",
-      // 值
       whereArgs: whereArgs,
     );
   }
 
-  ///修改数据
+  /// 修改数据 // Update data
   Future<int> update(
       Map<String, Object?> where, Map<String, dynamic> data) async {
     List<String> keys = where.keys.toList();
@@ -133,7 +134,7 @@ abstract class DbProvider {
     );
   }
 
-  ///查找数据
+  /// 查找数据 // Query data
   Future<List<dynamic>> find({
     Map<String, Object?>? where,
     int? page,
@@ -152,7 +153,6 @@ abstract class DbProvider {
       }
     }
     String? sql = keys.isEmpty ? null : "${keys.join(" = ? AND ")} = ?";
-    // 多条件查询
     if (keys.length == 1 && whereArgs.first is List) {
       sql = "${keys.first} IN (?, ?, ?)";
       whereArgs = whereArgs.first as List<Object?>;
@@ -168,7 +168,7 @@ abstract class DbProvider {
     );
   }
 
-  /// 模糊查询
+  /// 模糊查询 // Fuzzy search
   Future<List<dynamic>> blurFind({
     Map<String, Object?>? where,
     Map<String, Object?>? whereMust,
@@ -201,6 +201,7 @@ abstract class DbProvider {
     );
   }
 
+  /// 原生SQL查询 // Execute raw SQL query
   Future<List<Map<String, Object?>>> rawQuery(String sql) async {
     return _db!.rawQuery(sql);
   }

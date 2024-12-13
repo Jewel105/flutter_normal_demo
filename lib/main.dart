@@ -13,6 +13,7 @@ void main() {
   // Run the app within the error-handling zone
   errorReport.errorHandlingZone.run(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    // SqliteUtil.forFeature();
     // Initialize utilities
     await StorageUtil.init();
     runApp(const MyApp());
