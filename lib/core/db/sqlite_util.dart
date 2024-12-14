@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_normal_demo/core/db/table/test_table.dart';
 
 import 'db_provider.dart';
+import 'table/test_table.dart';
 
 class SqliteUtil {
   static Future<void> forFeature() async {
