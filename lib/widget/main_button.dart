@@ -39,10 +39,10 @@ class MainButton extends StatelessWidget {
       width: width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          disabledBackgroundColor: AppColor.mainColor,
-          disabledForegroundColor: AppColor.mainColor,
-          foregroundColor: bgColor ?? AppColor.mainColor,
-          backgroundColor: bgColor ?? AppColor.mainColor,
+          disabledBackgroundColor: AppColor.mainDarkColor,
+          disabledForegroundColor: AppColor.mainDarkColor,
+          foregroundColor: bgColor ?? AppColor.mainDarkColor,
+          backgroundColor: bgColor ?? AppColor.mainDarkColor,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radius ?? 20.w),

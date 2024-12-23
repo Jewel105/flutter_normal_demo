@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 import '../../page/base/page_404.dart';
 import '../../page/demo/demo_page.dart';
 import '../../page/index_page.dart';
-import '../../page/login/login_page.dart';
 
 typedef WidgetBuilder = Widget Function(Object? arguments);
 
 class RouteConfig {
   static final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
     '/': (Object? arguments) => const IndexPage(),
-    '/login': (Object? arguments) => const LoginPage(),
-    '/demo_page': (Object? arguments) => const DemoPage(),
+    '/demo_page': (Object? arguments) => const DemoPage()
   };
 
   static Route<dynamic>? generateRoute(RouteSettings settings) {

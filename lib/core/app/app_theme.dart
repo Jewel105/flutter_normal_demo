@@ -10,13 +10,18 @@ class AppTheme {
     highlightColor: Colors.transparent,
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.light,
-      seedColor: AppColor.mainColor,
+      seedColor: AppColor.mainDarkColor,
     ),
     textTheme: TextTheme(bodyMedium: AppStyle.text14),
     appBarTheme: AppBarTheme(
       centerTitle: true,
       titleTextStyle: AppStyle.text16W600Black,
       elevation: 0, // Remove shadow under AppBar (去除 AppBar 下方的阴影)
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      unselectedItemColor: AppColor.textBlack,
+      selectedItemColor: AppColor.mainDarkColor,
+      type: BottomNavigationBarType.fixed,
     ),
   );
 
@@ -26,13 +31,18 @@ class AppTheme {
     highlightColor: Colors.transparent,
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.dark,
-      seedColor: AppColor.mainColor,
+      seedColor: AppColor.mainLightColor,
     ),
     textTheme: TextTheme(bodyMedium: AppStyle.text14),
     appBarTheme: AppBarTheme(
       centerTitle: true,
       titleTextStyle: AppStyle.text16W600White,
       elevation: 0,
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      type: BottomNavigationBarType.fixed,
+      unselectedItemColor: AppColor.textWhite,
+      selectedItemColor: AppColor.mainLightColor,
     ),
   );
 }

@@ -1,3 +1,6 @@
 {
-  "home": "home"
+  "home": "Home",
+  "search": "Search",
+  "add": "Add",
+  "mine": "Mine"
 }
