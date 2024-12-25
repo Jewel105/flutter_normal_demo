@@ -15,7 +15,7 @@ class RouteConfig {
 
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     PageConfig? pageConfig = settings.arguments as PageConfig?;
-    var arguments = pageConfig?.arguments ?? settings.arguments;
+    var arguments = pageConfig?.arguments;
     final Widget widget =
         routes[settings.name]?.call(arguments) ?? const Page404();
     return _buildRoute(widget, pageConfig?.transitionType);
