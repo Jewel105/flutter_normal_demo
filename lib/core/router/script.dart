@@ -24,7 +24,7 @@ void main() {
       for (var i = 1; i < listStr.length; i++) {
         result += listStr[i][0].toUpperCase() + listStr[i].substring(1);
       }
-      e = result;
+      return "  static const String $result = '/$e';";
     }
     return "  static const String $e = '/$e';";
   }).join('\n');
