@@ -1,26 +1,36 @@
 import 'package:flutter/material.dart';
 
-// Navigate pages without context
-// 全局key，用于无context跳转的情况
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+import 'models.dart';
 
 class Nav {
   /// push page
   static Future<dynamic> push(
     String path, {
     Object? arguments,
+    TransitionType transitionType = TransitionType.fromRight,
   }) {
-    return Navigator.of(navigatorKey.currentContext!)
-        .pushNamed(path, arguments: arguments);
+    return Navigator.of(navigatorKey.currentContext!).pushNamed(
+      path,
+      arguments: PageConfig(
+        transitionType: transitionType,
+        arguments: arguments,
+      ),
+    );
   }
 
   /// replace page
   static Future<dynamic> replease(
     String path, {
     Object? arguments,
+    TransitionType transitionType = TransitionType.fromRight,
   }) {
-    return Navigator.of(navigatorKey.currentContext!)
-        .pushReplacementNamed(path, arguments: arguments);
+    return Navigator.of(navigatorKey.currentContext!).pushReplacementNamed(
+      path,
+      arguments: PageConfig(
+        transitionType: transitionType,
+        arguments: arguments,
+      ),
+    );
   }
 
   /// Navigate to a page and clear the router stack
@@ -28,9 +38,16 @@ class Nav {
   static Future<dynamic> switchTab(
     String path, {
     Object? arguments,
+    TransitionType transitionType = TransitionType.none,
   }) {
-    return Navigator.of(navigatorKey.currentContext!)
-        .pushNamedAndRemoveUntil(path, (_) => false, arguments: arguments);
+    return Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil(
+      path,
+      (_) => false,
+      arguments: PageConfig(
+        transitionType: transitionType,
+        arguments: arguments,
+      ),
+    );
   }
 
   /// back to the previous page
