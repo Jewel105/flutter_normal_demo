@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../page/base/scan_page.dart';
+
 import '../../page/base/page_404.dart';
 import '../../page/demo/demo_page.dart';
 import '../../page/index_page.dart';
@@ -11,6 +13,7 @@ class RouteConfig {
   static final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
     '/': (Object? arguments) => const IndexPage(),
     '/demo_page': (Object? arguments) => const DemoPage(),
+    '/scan': (Object? arguments) => const ScanPage(),
   };
 
   static Route<dynamic>? generateRoute(RouteSettings settings) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../core/extensions/context_extension.dart';
 import '../../core/router/index.dart';
 import '../../widget/main_button.dart';
 import '../../widget/top_app_bar.dart';
@@ -17,12 +16,10 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           MainButton(
-            textName: context.locale.add,
-            onTap: () {
-              Nav.push(
-                Routes.demoPage,
-                transitionType: TransitionType.none,
-              );
+            textName: "Scan QR Code",
+            onTap: () async {
+              var qr = await Nav.push(Routes.scan);
+              debugPrint('QR Code: $qr');
             },
           ),
         ],

@@ -2,5 +2,9 @@
   "home": "Home",
   "search": "Search",
   "add": "Add",
-  "mine": "Mine"
+  "mine": "Mine",
+  "controllerNotReady": "Controller not ready",
+  "permissionDenied": "Permission denied",
+  "scanUnsupported": "Scanning is unsupported on this device",
+  "genericError": "Generic Error"
 }

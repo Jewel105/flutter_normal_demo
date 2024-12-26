@@ -2,5 +2,9 @@
   "home": "首页",
   "search": "搜索",
   "add": "添加",
-  "mine": "我的"
+  "mine": "我的",
+  "controllerNotReady": "控制器未准备好",
+  "permissionDenied": "权限被拒绝",
+  "scanUnsupported": "此设备不支持扫描",
+  "genericError": "通用错误"
 }
