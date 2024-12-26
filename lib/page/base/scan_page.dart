@@ -342,6 +342,7 @@ class ScannerErrorWidget extends StatelessWidget {
 
     return Container(
       alignment: Alignment.topCenter,
+      padding: EdgeInsets.only(top: 230.h),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
