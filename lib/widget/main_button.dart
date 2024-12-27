@@ -34,18 +34,17 @@ class MainButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color backgroundColor = bgColor ?? Theme.of(context).colorScheme.primary;
     return SizedBox(
       height: height ?? 40.w,
       width: width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          disabledBackgroundColor: AppColor.mainDarkColor,
-          disabledForegroundColor: AppColor.mainDarkColor,
-          foregroundColor: bgColor ?? AppColor.mainDarkColor,
-          backgroundColor: bgColor ?? AppColor.mainDarkColor,
+          foregroundColor: backgroundColor,
+          backgroundColor: backgroundColor,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radius ?? 20.w),
+            borderRadius: BorderRadius.circular(radius ?? 8.w),
           ),
         ),
         onPressed: onTap == null
@@ -66,7 +65,7 @@ class MainButton extends StatelessWidget {
               style: TextStyle(
                 color: onTap == null
                     ? AppColor.textGrey
-                    : (textColor ?? AppColor.textBlack),
+                    : textColor ?? Theme.of(context).colorScheme.onPrimary,
                 fontSize: fontSize ?? 14.sp,
                 fontWeight: FontWeight.w600,
               ),

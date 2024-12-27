@@ -22,6 +22,9 @@ class HomePage extends StatelessWidget {
               debugPrint('QR Code: $qr');
             },
           ),
+          const MainButton(
+            textName: "Disable Button",
+          ),
         ],
       ),
     );

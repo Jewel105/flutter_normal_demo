@@ -47,15 +47,21 @@ class _IndexPageState extends State<IndexPage> {
         onPageChanged: indexLogic.handlePageChanged,
         children: pages,
       ),
-      bottomNavigationBar: ValueListenableBuilder(
-          valueListenable: indexState.pageIndex,
-          builder: (context, pageIndex, _) {
-            return BottomNavigationBar(
-              currentIndex: pageIndex,
-              onTap: indexLogic.handleNavBarTap,
-              items: bottomItems,
-            );
-          }),
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+        ),
+        child: ValueListenableBuilder(
+            valueListenable: indexState.pageIndex,
+            builder: (context, pageIndex, _) {
+              return BottomNavigationBar(
+                currentIndex: pageIndex,
+                onTap: indexLogic.handleNavBarTap,
+                items: bottomItems,
+              );
+            }),
+      ),
     );
   }
 }

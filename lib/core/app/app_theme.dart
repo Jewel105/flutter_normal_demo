@@ -18,9 +18,12 @@ class AppTheme {
       titleTextStyle: AppStyle.text16W600Black,
       elevation: 0, // Remove shadow under AppBar (去除 AppBar 下方的阴影)
     ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
       unselectedItemColor: AppColor.textBlack,
-      selectedItemColor: AppColor.mainDarkColor,
+      selectedItemColor: ColorScheme.fromSeed(
+        brightness: Brightness.light,
+        seedColor: AppColor.mainDarkColor,
+      ).primary,
       type: BottomNavigationBarType.fixed,
     ),
   );
@@ -39,10 +42,13 @@ class AppTheme {
       titleTextStyle: AppStyle.text16W600White,
       elevation: 0,
     ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
       unselectedItemColor: AppColor.textWhite,
-      selectedItemColor: AppColor.mainLightColor,
+      selectedItemColor: ColorScheme.fromSeed(
+        brightness: Brightness.dark,
+        seedColor: AppColor.mainLightColor,
+      ).primary,
     ),
   );
 }
