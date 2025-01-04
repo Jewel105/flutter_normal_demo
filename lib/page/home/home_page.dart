@@ -25,6 +25,12 @@ class HomePage extends StatelessWidget {
           const MainButton(
             textName: "Disable Button",
           ),
+          MainButton(
+            textName: "switch language",
+            onTap: () {
+              Nav.push(Routes.language);
+            },
+          ),
         ],
       ),
     );

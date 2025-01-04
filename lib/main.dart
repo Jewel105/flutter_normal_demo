@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'core/app/app_theme.dart';
 import 'core/provider/app_provider.dart';
+import 'core/provider/locale_provider.dart';
 import 'core/router/index.dart';
 import 'core/utils/index.dart';
 
@@ -13,11 +14,14 @@ void main() {
   // Run the app within the error-handling zone
   errorReport.errorHandlingZone.run(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    // SqliteUtil.forFeature();
     // Initialize utilities
-    await StorageUtil.init();
-    // Wait for ScreenUtil to initialize itself.
-    await ScreenUtil.ensureScreenSize();
+    await Future.wait([
+      // Initialize StorageUtil
+      StorageUtil.init(),
+      // Wait for ScreenUtil to initialize itself.
+      ScreenUtil.ensureScreenSize(),
+      // SqliteUtil.forFeature(); //sqlite initialization
+    ]);
     runApp(const MyApp());
   });
 }
@@ -45,17 +49,24 @@ class MyApp extends StatelessWidget {
           child: MultiProvider(
             providers: [
               ChangeNotifierProvider(create: (_) => AppProvider()),
+              ChangeNotifierProvider(create: (_) => LocaleProvider()),
             ],
-            child: MaterialApp(
-              title: 'Flutter Demo',
-              theme: AppTheme.lightTheme,
-              darkTheme: AppTheme.darkTheme,
-              themeMode: ThemeMode.dark,
-              onGenerateRoute: RouteConfig.generateRoute,
-              navigatorKey: navigatorKey,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              supportedLocales: AppLocalizations.supportedLocales,
-            ),
+            child: Selector<LocaleProvider, Locale?>(
+                selector: (context, provider) => provider.locale,
+                builder: (context, locale, _) {
+                  return MaterialApp(
+                    title: 'Flutter Demo',
+                    theme: AppTheme.lightTheme,
+                    darkTheme: AppTheme.darkTheme,
+                    themeMode: ThemeMode.system,
+                    onGenerateRoute: RouteConfig.generateRoute,
+                    navigatorKey: navigatorKey,
+                    locale: locale,
+                    localizationsDelegates:
+                        AppLocalizations.localizationsDelegates,
+                    supportedLocales: AppLocalizations.supportedLocales,
+                  );
+                }),
           ),
         );
       },

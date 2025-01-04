@@ -34,6 +34,10 @@ extension WidgetExtension on Widget {
     return Align(alignment: Alignment.bottomCenter, child: this);
   }
 
+  Widget get expanded {
+    return Expanded(child: this);
+  }
+
   Widget p(double distance) => Padding(
         padding: EdgeInsets.all(distance),
         child: this,
