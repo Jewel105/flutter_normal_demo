@@ -29,7 +29,7 @@ class _ScanPageState extends State<ScanPage> with WidgetsBindingObserver {
 
   /// When detected a barcode, navigate back with the result
   void _handleBarcode(BarcodeCapture barcodes) {
-    EasyThrottle.throttle(SCANHANDLERTAG, Durations.extralong4, () {
+    EasyThrottle.throttle(AppConstant.SCANHANDLERTAG, Durations.extralong4, () {
       Barcode? barcode = barcodes.barcodes.firstOrNull;
       var scanResult = barcode?.rawValue;
       if (scanResult != null) {

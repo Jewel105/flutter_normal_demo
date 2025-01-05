@@ -14,7 +14,7 @@ class DioInterceptors extends Interceptor {
   ) {
     // Add token to headers
     // 添加token头
-    String? token = StorageUtil.get(TOKEN) as String?;
+    String? token = StorageUtil.get(AppConstant.TOKEN) as String?;
     if (token != null) {
       options.headers['Token'] = token;
     }

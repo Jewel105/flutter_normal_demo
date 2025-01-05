@@ -22,14 +22,14 @@ class LocaleProvider extends ChangeNotifier {
 
   String _locale = '';
   Locale? get locale {
-    _locale = StorageUtil.get(LOCALE) ?? "system";
+    _locale = StorageUtil.get(AppConstant.LOCALE) ?? "system";
     return locales[_locale]?.locale;
   }
 
   changeLanguage(String val) async {
     if (val == _locale) return;
     _locale = val;
-    await StorageUtil.set(LOCALE, val);
+    await StorageUtil.set(AppConstant.LOCALE, val);
     notifyListeners();
   }
 }
