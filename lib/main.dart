@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
@@ -8,6 +7,7 @@ import 'core/provider/app_provider.dart';
 import 'core/provider/locale_provider.dart';
 import 'core/router/index.dart';
 import 'core/utils/index.dart';
+import 'gen/i18n/app_localizations.dart';
 
 void main() {
   final errorReport = ErrorReportUtil();
