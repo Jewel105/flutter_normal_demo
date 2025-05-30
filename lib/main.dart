@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_normal_demo/core/app/app_color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hb_common/hb_common.dart';
+import 'package:hb_router/utils/hb_router.dart';
 import 'package:provider/provider.dart';
 
 import 'core/app/app_theme.dart';
@@ -11,8 +12,11 @@ import 'core/router/index.dart';
 import 'gen/i18n/app_localizations.dart';
 
 void main() {
-  // TODO: HbErrorReport reportError need to be implemented
-  final errorReport = HbErrorReport();
+  final errorReport = HbErrorReport(
+    reportError: (error, stackTrace) {
+      // TODO: Implement error reporting logic here
+    },
+  );
   // Run the app within the error-handling zone
   errorReport.errorHandlingZone.run(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -63,11 +67,15 @@ class MyApp extends StatelessWidget {
                     theme: AppTheme.lightTheme,
                     darkTheme: AppTheme.darkTheme,
                     themeMode: ThemeMode.system,
-                    onGenerateRoute: RouteConfig.generateRoute,
-                    navigatorKey: navigatorKey,
+                    onGenerateRoute: HbRouter(
+                      RouteConfig.routes,
+                    ).generateRoute,
+                    navigatorKey: HbRouter.key,
                     locale: locale,
-                    localizationsDelegates:
-                        AppLocalizations.localizationsDelegates,
+                    localizationsDelegates: const [
+                      ...AppLocalizations.localizationsDelegates,
+                      ...HbCommonLocalizations.localizationsDelegates,
+                    ],
                     supportedLocales: AppLocalizations.supportedLocales,
                   );
                 }),

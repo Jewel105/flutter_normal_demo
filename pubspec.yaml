@@ -25,6 +25,7 @@ dependencies:
   permission_handler: ^11.3.1
   easy_debounce: ^2.0.3
   hb_common: ^0.0.2
+  hb_router: ^0.0.1
 
 dev_dependencies:
   flutter_test:

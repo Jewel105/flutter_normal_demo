@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hb_common/widget/index.dart';
+import 'package:hb_router/utils/hb_nav.dart';
 
 import '../../core/router/index.dart';
 
@@ -17,7 +18,7 @@ class HomePage extends StatelessWidget {
           HbButton(
             text: "Scan QR Code",
             onTap: () async {
-              var qr = await Nav.push(Routes.scan);
+              var qr = await HbNav.push(Routes.scan);
               debugPrint('QR Code: $qr');
             },
           ),
@@ -27,7 +28,7 @@ class HomePage extends StatelessWidget {
           HbButton(
             text: "switch language",
             onTap: () {
-              Nav.push(Routes.language);
+              HbNav.push(Routes.language);
             },
           ),
         ],

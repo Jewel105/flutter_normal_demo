@@ -286,7 +286,7 @@ packages:
     source: hosted
     version: "0.0.2"
   hb_router:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: hb_router
       sha256: d986a71f0eefa6baac00005758f9aa84fe3235031943d7c9e004ea0d3cad1e02
