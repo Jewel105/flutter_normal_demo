@@ -48,3 +48,5 @@ app.*.map.json
 .fvm/
 
 lib/gen/
+
+android/app/.cxx/

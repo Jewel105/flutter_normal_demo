@@ -10,22 +10,19 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  shared_preferences: ^2.3.3
   flutter_screenutil: ^5.9.3
   flutter_localization: ^0.2.2
   intl: ^0.19.0
   dio: ^5.7.0
-  mobile_scanner: ^6.0.2
   dio_http2_adapter: ^2.5.3
-  http_certificate_pinning: ^2.1.3
   package_info_plus: ^8.1.1
   provider: ^6.1.2
   sqflite: ^2.4.1
-  image_picker: ^1.1.2
-  permission_handler: ^11.3.1
   easy_debounce: ^2.0.3
   hb_common: ^0.0.2
   hb_router: ^0.0.1
+  hb_qr: ^0.0.2
+  http_certificate_pinning: ^3.0.1
 
 dev_dependencies:
   flutter_test:
