@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../widget/top_app_bar.dart';
+import 'package:hb_common/widget/hb_app_bar.dart';
 
 class AddPage extends StatelessWidget {
   const AddPage({super.key});
@@ -8,7 +7,7 @@ class AddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopAppBar(
+      appBar: HbAppBar(
         titleName: "AddPage",
       ),
       body: Container(),

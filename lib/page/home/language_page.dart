@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hb_common/hb_common.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/extensions/index.dart';
 import '../../core/provider/locale_provider.dart';
-import '../../widget/top_app_bar.dart';
 
 class LanguagePage extends StatelessWidget {
   const LanguagePage({super.key});
@@ -12,7 +11,7 @@ class LanguagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopAppBar(
+      appBar: HbAppBar(
         titleName: "LanguagePage",
       ),
       body: Consumer<LocaleProvider>(builder: (context, localeProvider, _) {
@@ -21,7 +20,7 @@ class LanguagePage extends StatelessWidget {
           children: localeProvider.locales.values.map((e) {
             return Row(
               children: [
-                e.name.text16W600.expanded,
+                e.name.text16w600().expanded,
                 if (e.code == currentLocale.languageCode)
                   const Icon(Icons.check),
               ],

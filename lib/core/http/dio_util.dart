@@ -4,11 +4,12 @@ import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:dio_http2_adapter/dio_http2_adapter.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_normal_demo/core/env/env.dart';
+import 'package:hb_common/utils/index.dart';
 import 'package:http_certificate_pinning/http_certificate_pinning.dart';
 
 import 'base_entity.dart';
 import 'dio_interceptors.dart';
-import 'env.dart';
 
 // 请求方法
 // request method
@@ -60,7 +61,7 @@ class DioUtil {
     _dio = Dio(options);
 
     // release
-    if (kReleaseMode && Env.appEnv == EnvType.production) {
+    if (kReleaseMode && Env.envConfig.envType == EnvType.production) {
       //生产环境配置http2证书
       // Add http2 client adapter
       _dio.httpClientAdapter = Http2Adapter(
@@ -89,7 +90,7 @@ class DioUtil {
 
     // 添加拦截
     // Add interceptors
-    if (Env.appEnv == EnvType.production) {
+    if (Env.envConfig.envType == EnvType.production) {
       // 生产环境校验证书，防止中间人攻击
       // Verify the certificate, preventing man-in-the-middle attacks
       _dio.interceptors.add(CertificatePinningInterceptor(
@@ -125,7 +126,7 @@ class DioUtil {
     options.method = method.value;
 
     if (loading) {
-      // TODO: Add loading UI
+      HbDialog.showLoading();
     }
 
     try {
@@ -146,7 +147,7 @@ class DioUtil {
       rethrow;
     } finally {
       if (loading) {
-        // TODO: Remove loading UI
+        HbDialog.closeAllLoading();
       }
     }
   }

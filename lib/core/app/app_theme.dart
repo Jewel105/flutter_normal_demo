@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'app_color.dart';
-import 'app_style.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hb_common/app/hb_color.dart';
+import 'package:hb_common/app/hb_style.dart';
 
 class AppTheme {
   /// Main light theme for the app
@@ -10,19 +10,23 @@ class AppTheme {
     highlightColor: Colors.transparent,
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.light,
-      seedColor: AppColor.mainDarkColor,
+      seedColor: HbColor.mainDarkColor,
     ),
-    textTheme: TextTheme(bodyMedium: AppStyle.text14),
+    textTheme: TextTheme(bodyMedium: HbStyle.text14),
     appBarTheme: AppBarTheme(
       centerTitle: true,
-      titleTextStyle: AppStyle.text16W600Black,
+      titleTextStyle: TextStyle(
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w600,
+        color: HbColor.textBlack,
+      ),
       elevation: 0, // Remove shadow under AppBar (去除 AppBar 下方的阴影)
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      unselectedItemColor: AppColor.textBlack,
+      unselectedItemColor: HbColor.textBlack,
       selectedItemColor: ColorScheme.fromSeed(
         brightness: Brightness.light,
-        seedColor: AppColor.mainDarkColor,
+        seedColor: HbColor.mainDarkColor,
       ).primary,
       type: BottomNavigationBarType.fixed,
     ),
@@ -34,20 +38,24 @@ class AppTheme {
     highlightColor: Colors.transparent,
     colorScheme: ColorScheme.fromSeed(
       brightness: Brightness.dark,
-      seedColor: AppColor.mainLightColor,
+      seedColor: HbColor.mainLightColor,
     ),
-    textTheme: TextTheme(bodyMedium: AppStyle.text14),
+    textTheme: TextTheme(bodyMedium: HbStyle.text14),
     appBarTheme: AppBarTheme(
       centerTitle: true,
-      titleTextStyle: AppStyle.text16W600White,
+      titleTextStyle: TextStyle(
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w600,
+        color: HbColor.textWhite,
+      ),
       elevation: 0,
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
-      unselectedItemColor: AppColor.textWhite,
+      unselectedItemColor: HbColor.textWhite,
       selectedItemColor: ColorScheme.fromSeed(
         brightness: Brightness.dark,
-        seedColor: AppColor.mainLightColor,
+        seedColor: HbColor.mainLightColor,
       ).primary,
     ),
   );

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hb_common/widget/index.dart';
 
 import '../../core/router/index.dart';
-import '../../widget/main_button.dart';
-import '../../widget/top_app_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,23 +9,23 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopAppBar(
+      appBar: HbAppBar(
         titleName: "HomePage",
       ),
       body: Column(
         children: [
-          MainButton(
-            textName: "Scan QR Code",
+          HbButton(
+            text: "Scan QR Code",
             onTap: () async {
               var qr = await Nav.push(Routes.scan);
               debugPrint('QR Code: $qr');
             },
           ),
-          const MainButton(
-            textName: "Disable Button",
+          const HbButton(
+            text: "Disable Button",
           ),
-          MainButton(
-            textName: "switch language",
+          HbButton(
+            text: "switch language",
             onTap: () {
               Nav.push(Routes.language);
             },

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:hb_common/utils/hb_storage.dart';
 
 import '../app/app_constant.dart';
-import '../utils/index.dart';
 import 'base_entity.dart';
 
 class DioInterceptors extends Interceptor {
@@ -14,7 +14,7 @@ class DioInterceptors extends Interceptor {
   ) {
     // Add token to headers
     // 添加token头
-    String? token = StorageUtil.get(AppConstant.TOKEN) as String?;
+    String? token = HbStorage.get(AppConstant.TOKEN) as String?;
     if (token != null) {
       options.headers['Token'] = token;
     }

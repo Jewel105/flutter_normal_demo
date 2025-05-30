@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_normal_demo/core/app/app_color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hb_common/hb_common.dart';
 import 'package:provider/provider.dart';
 
 import 'core/app/app_theme.dart';
 import 'core/provider/app_provider.dart';
 import 'core/provider/locale_provider.dart';
 import 'core/router/index.dart';
-import 'core/utils/index.dart';
 import 'gen/i18n/app_localizations.dart';
 
 void main() {
-  final errorReport = ErrorReportUtil();
+  // TODO: HbErrorReport reportError need to be implemented
+  final errorReport = HbErrorReport();
   // Run the app within the error-handling zone
   errorReport.errorHandlingZone.run(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    // 初始化hb颜色
+    AppColor.init();
     // Initialize utilities
     await Future.wait([
-      // Initialize StorageUtil
-      StorageUtil.init(),
+      // Initialize HbStorage
+      HbStorage.init(),
       // Wait for ScreenUtil to initialize itself.
       ScreenUtil.ensureScreenSize(),
       // SqliteUtil.forFeature(); //sqlite initialization

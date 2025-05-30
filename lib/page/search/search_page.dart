@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../widget/top_app_bar.dart';
+import 'package:hb_common/hb_common.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -8,9 +7,7 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopAppBar(
-        titleName: "SearchPage",
-      ),
+      appBar: HbAppBar(titleName: "SearchPage"),
       body: Container(),
     );
   }

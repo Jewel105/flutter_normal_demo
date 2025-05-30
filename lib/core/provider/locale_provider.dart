@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hb_common/utils/index.dart';
 
 import '../app/app_constant.dart';
-import '../utils/storage_util.dart';
 
 class LocaleInfo {
   final String code;
@@ -22,14 +22,14 @@ class LocaleProvider extends ChangeNotifier {
 
   String _locale = '';
   Locale? get locale {
-    _locale = StorageUtil.get(AppConstant.LOCALE) ?? "system";
+    _locale = HbStorage.get(AppConstant.LOCALE) ?? "system";
     return locales[_locale]?.locale;
   }
 
   changeLanguage(String val) async {
     if (val == _locale) return;
     _locale = val;
-    await StorageUtil.set(AppConstant.LOCALE, val);
+    await HbStorage.set(AppConstant.LOCALE, val);
     notifyListeners();
   }
 }
