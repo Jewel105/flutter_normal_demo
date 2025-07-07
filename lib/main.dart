@@ -71,6 +71,8 @@ class MyApp extends StatelessWidget {
                       RouteConfig.routes,
                     ).generateRoute,
                     navigatorKey: HbRouter.key,
+                    builder: HbDialog.setup(),
+                    navigatorObservers: [HbDialog.navigatorObservers],
                     locale: locale,
                     localizationsDelegates: const [
                       ...AppLocalizations.localizationsDelegates,

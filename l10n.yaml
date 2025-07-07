@@ -3,3 +3,4 @@ arb-dir: lib/core/l10n
 nullable-getter: false 
 synthetic-package: false
 output-dir: lib/gen/i18n
+untranslated-messages-file: desiredFileName.txt

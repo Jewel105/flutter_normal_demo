@@ -24,14 +24,10 @@ class Env {
 class EnvConfig {
   final EnvType envType;
   final String envHttpUrl;
-  final String envWsUrl;
-  final String tronUrl;
 
   const EnvConfig({
     required this.envType,
     required this.envHttpUrl,
-    required this.envWsUrl,
-    required this.tronUrl,
   });
 }
 
